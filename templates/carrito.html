@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+    <title>Carrito</title>
+{% endblock %}
+
+{% block container %}
+    <h1>Carrito</h1>
+
+    {% for car in carrito %}
+        <div class="row my-2 shadow p-3 mb-5 bg-white rounded">
+            <div class="col-4 d-flex justify-content-center align-items-center">
+                <img src="http://localhost:8000/media/{{ car.producto.imagen }}" alt="carImg" srcset="" width="100px">
+            </div>
+            <div :class="mobile ? 'col-8' : 'col-6'">                
+                <p>{{car.producto.descripcion}}</p>
+                <p>Precio: {{car.producto.precio}}</p>
+                <a href="#" class="btn btn-success">Comprar</a>
+                <a href="{% url 'carritoDel' pk=car.id %}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>                
+            </div>                        
+            
+        </div>        
+    {% endfor %}  
+    <p class="float-right">Total: {{total}}</p>    
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+    <title>Inicio</title>
+{% endblock %}
+
+{% block container %}
+    <div class="">
+        <div class="row">
+            {% for producto in productos %}
+                {% if forloop.counter <= 3 %}
+                    <div class="col">
+                        <div class="h-100 d-flex flex-column align-items-center justify-content-between">
+                            <h4>{{producto.nombre}}</h4>
+                            <img src="http://localhost:8000/media/{{ producto.imagen}}" alt="imgProd" srcset="" width="200px">
+                            <br>
+                            <a href="{% url 'productoDetalle' pk=producto.id %}" class="btn btn-primary my-2">Ver ahora</a>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+
+        </div>
+        <br>
+        <h3 class="text-center">Otros productos</h3>
+        <div class="row justify-content-center">
+            <div class="">
+                <ul>
+                    {% for producto in productos %}
+                        {% if forloop.counter > 3%}
+                            <li>
+                                <a href="{% url 'productoDetalle' pk=producto.id %}">{{producto.nombre}} | {{producto.descripcion}}</a>
+                            </li>
+                            <br>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

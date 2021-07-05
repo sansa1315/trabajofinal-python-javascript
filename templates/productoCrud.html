@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+    <title>Producto</title>
+{% endblock %}
+
+{% block container %} 
+
+    <div class="user_card" id="app">        
+        <div class="d-flex justify-content-center">
+            <div class="d-flex flex-column">                
+                <div>
+                    <h3 id="form-title" v-if='!edit'>Crear nuevo Producto</h3>
+                    <h3 id="form-title" v-if='edit'>Editar producto</h3>
+                </div>
+            </div>
+        </div>
+        
+        <div class="d-flex justify-content-center form_container">
+            {% if request.path|slice:'19:21' %}
+                <form method="POST" action="{% url 'productoEdit' pk=request.path|slice:'19:21' %}" enctype="multipart/form-data">
+            {% else %}
+                <form method="POST" action="{% url 'productoCrud' %}" enctype="multipart/form-data">
+            {% endif %}
+            
+                {% csrf_token %}
+                <div class="form-group mb-3">
+                    <label >Nombre</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend flex-fill">
+                            <span class="input-group-text"><i class="fas fa-address-card"></i></span>
+                        {{form.nombre}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-3">
+                            <label >Imagen</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-file"></i></span>
+                                {{form.imagen}}
+                                </div>
+                            </div>
+                            <div>
+                                <img src="http://localhost:8000/media/{{ form.imagen.value }}" alt="productoImg" srcset="" width="150px">
+                            </div>                            
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-3">
+                            <label >Categoria</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend flex-fill">
+                                    <span class="input-group-text"><i class="fas fa-book-open"></i></span>
+                                {{form.categoria}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label >Descripcion</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend flex-fill">
+                                    <span class="input-group-text"><i class="fas fa-align-justify"></i></span>
+                                {{form.descripcion}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label >Precio</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend flex-fill">
+                                    <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                                {{form.precio}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">                                        
+                    <button type="submit" class="btn btn-primary m-2" v-if="!edit">Crear</button>
+                    <button type="submit" class="btn btn-warning m-2" v-if="edit">Modificar</button>
+
+                </div>
+
+
+
+            </form>
+                {{ form.errors }}
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+{% endblock %}
+
+{% block vuejs %}
+    <script>
+        let form_fields = document.getElementsByTagName('input')
+
+        let select = document.getElementById('id_categoria').classList.add('form-control')
+
+
+		for (let field in form_fields){
+			form_fields[field].className += ' form-control'
+		}
+
+        var app = new Vue({
+            delimiters:['[[',']]'],
+            el:'#app',
+            data:{
+                nuevo: true,
+                select:false,
+                edit: ('{{request.path}}').substr(19) ? true : false
+            }
+        })
+
+    </script>
+{% endblock %}

@@ -1,0 +1,41 @@
+.footer-login{
+    text-align: center;
+    font-size: x-small;
+    /* margin-top: 15px; */
+
+}
+
+.login-container{
+    width: 360px; 
+    margin: 0 auto;
+}
+
+.btn-login{
+    float: right;
+}
+
+.navbar-collaps-login{
+    flex-grow: 0;
+    align-items: center;
+}
+
+.form-inline-login {
+    
+    display: flex;
+    
+    /* flex-flow: row wrap; */
+    
+    align-items: center;
+}
+
+.navbar-login{
+    justify-content: space-between;
+}
+
+.button-margin{
+    margin: 5px;
+}
+
+.ml-1{
+    margin-left:5px;
+}

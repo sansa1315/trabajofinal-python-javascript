@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block head_content %}{% endblock %}
+    {% load static %}
+    <!-- <link rel="stylesheet" href="{% static 'css/buefy.min.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'css/boostrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/bulma.min.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'css/materialdesignicons.min.css' %}">
+    <script src="{% static 'js/vue.js' %}"></script>
+    <!-- <script src="{% static 'js/buefy.min.js' %}"></script> -->
+    <!-- <script src="{% static 'js/bootstrap.min.js' %}"></script> -->
+    <script src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <title>Document</title>
+</head>
+<body>
+    {% include "encabezado.html" %}
+    <hr>
+    {% include "menu.html" %}
+    <div class="container mt-5">
+        {% block container %}
+        {% endblock %}
+
+        {% block vuejs %}
+        {% endblock %}
+
+    </div>
+    <footer class="footer-login" >
+        <p>JAGUARETE KAA S.A. Copyright 2021 Todos los derechos reservados | Barly Espinal</p>
+    </footer>
+
+</body>
+</html>

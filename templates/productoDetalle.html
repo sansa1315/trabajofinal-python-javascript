@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+    <title>Detalle</title>
+{% endblock %}
+
+{% block container %}
+    <div>        
+        <h3>{{form.nombre.value}}</h3>
+        <p>{{form.descripcion.value}}</p>
+        
+        <img src="http://localhost:8000/media/{{ form.imagen.value }}" alt="imgInfo" srcset="" width="250">
+        <p>Precio {{form.precio.value}}</p>
+        <a href="{% url 'carrito' pk=productoId %}" class="btn btn-success">Añadir al carrito</a>        
+    </div>
+{% endblock %}

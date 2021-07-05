@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    {% load static %}
+    <a class="navbar-brand ml-1" href="{% url 'inicio' %}"><img src="{% static 'img/inicio.jpg' %}" alt="inicio" srcset="" width="150px"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+      <ul class="navbar-nav mr-auto">
+             <span>Hola {{request.user}}</span>        
+      </ul>
+      <div>
+        <ul class="navbar-nav mr-auto">
+          {% if not request.user.is_authenticated %}
+            <li class="nav-item active">          
+              <a href="{% url 'login' %}" class="btn btn-success m-1">Login</a>
+            </li>      
+            <li class="nav-item active">          
+              <a href="{% url 'registro' %}" class="btn btn-success m-1">Registro</a>
+            </li>
+          {% endif %}
+          {% if not request.user.is_superuser %}      
+          <li class="nav-item active">          
+            <a href="{% url 'carrito' %}" class="btn btn-success m-1">Carrito</a>
+          </li> 
+          {% endif %}
+          {% if request.user.is_authenticated %}                        
+            <li class="nav-item active">          
+              <a href="{% url 'logout' %}" class="btn btn-success m-1">Logout</a>
+            </li>  
+          {% endif %}                        
+        </ul>
+      </div>
+      
+    </div>
+  </nav>
+  

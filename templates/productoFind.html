@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+    <title>Login</title>
+{% endblock %}
+
+{% block container %}
+    <h1>Resultado</h1>
+   
+    {% if productos %}
+            <div id="app">
+                {% for prod in productos %}
+                        <div class="row my-2 shadow p-3 mb-5 bg-white rounded">
+                            <div class="col-4 d-flex justify-content-center align-items-center">
+                                <img src="http://localhost:8000/media/{{ prod.imagen }}" alt="prodImg" srcset="" width="100px">
+                            </div>
+                            <div :class="mobile ? 'col-8' : 'col-6'">
+                                <p>{{prod.descripcion}}</p>
+                                <p>Precio: {{prod.precio}}</p>
+                                <a href="{% url 'carrito' pk=prod.id %}" class="btn btn-success">añadir al carrito</a>
+                            </div>
+                            {% if request.user.is_superuser %}
+                            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                                <a href="{% url 'productoEdit' pk=prod.id %}" class="btn btn-primary m-2 btn-sm ">Update</a>                                
+                            </div>
+                            {% endif %}
+                        </div>
+                        <!-- <a href="#">{{prod.nombre}} | {{prod.descripcion}}</a><span> {{prod.precio}}</span> -->
+                {% endfor %}
+            </div>
+    {% endif %}
+{% endblock %}
+
+{% block vuejs%}
+    <script>
+        var app = new Vue({
+            delimiters:['[[',']]'],
+            el:'#app',
+            data:{
+            },
+            computed:{
+                mobile: function(){
+                    return window.matchMedia('(max-width: 600px)').matches
+                            ? true : false
+                }
+            }
+        })
+    </script>
+{% endblock %}
