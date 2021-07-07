@@ -4,25 +4,25 @@
     <title>Producto</title>
 {% endblock %}
 
-{% block container %} 
+{% block container %}
 
-    <div class="user_card" id="app">        
+    <div class="user_card" id="app">
         <div class="d-flex justify-content-center">
-            <div class="d-flex flex-column">                
+            <div class="d-flex flex-column">
                 <div>
                     <h3 id="form-title" v-if='!edit'>Crear nuevo Producto</h3>
                     <h3 id="form-title" v-if='edit'>Editar producto</h3>
                 </div>
             </div>
         </div>
-        
+
         <div class="d-flex justify-content-center form_container">
             {% if request.path|slice:'19:21' %}
                 <form method="POST" action="{% url 'productoEdit' pk=request.path|slice:'19:21' %}" enctype="multipart/form-data">
             {% else %}
                 <form method="POST" action="{% url 'productoCrud' %}" enctype="multipart/form-data">
             {% endif %}
-            
+
                 {% csrf_token %}
                 <div class="form-group mb-3">
                     <label >Nombre</label>
@@ -45,7 +45,7 @@
                             </div>
                             <div>
                                 <img src="http://localhost:8000/media/{{ form.imagen.value }}" alt="productoImg" srcset="" width="150px">
-                            </div>                            
+                            </div>
                         </div>
                     </div>
                     <div class="col">
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-end">                                        
+                <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary m-2" v-if="!edit">Crear</button>
                     <button type="submit" class="btn btn-warning m-2" v-if="edit">Modificar</button>
 
@@ -115,6 +115,5 @@
                 edit: ('{{request.path}}').substr(19) ? true : false
             }
         })
-
     </script>
 {% endblock %}

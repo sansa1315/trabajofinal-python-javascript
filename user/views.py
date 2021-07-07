@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 # Create your views here.
 
 def inicio(request):
-  productos = Producto.objects.all().order_by('-id')[:10]  
+  productos = Producto.objects.all().order_by('-id')[:10]
   return render(request, "inicio.html", {'productos': productos})
 
 def login(request):
@@ -52,16 +52,17 @@ def carrito(request, pk=""):
     return redirect('login')
   if pk:
     producto = Producto.objects.get(id=pk)
-    usuario = User.objects.get(username=request.user)  
-    order = {'usuario': usuario, 'producto': producto}  
-    form = CreateOrderForm(order)        
+    usuario = User.objects.get(username=request.user)
+    order = {'usuario': usuario, 'producto': producto}
+    form = CreateOrderForm(order)
     if form.is_valid():
       form.save()
-  orders = Order.objects.filter(usuario=request.user)  
+  orders = Order.objects.filter(usuario=request.user)
   total = 0
   for order in orders:
     total += order.producto.precio
-  
+    # print(order.producto)
+
   return render(request, "carrito.html", {'carrito': orders, 'total':total})
 
 def carritoDel(request, pk):
@@ -69,8 +70,8 @@ def carritoDel(request, pk):
     return redirect('login')
 
   order = Order.objects.get(id=pk)
-  order.delete()      
-  orders = Order.objects.filter(usuario=request.user)  
+  order.delete()
+  orders = Order.objects.filter(usuario=request.user)
   total = 0
   for order in orders:
     total += order.producto.precio
@@ -81,7 +82,6 @@ def productoCrud(request):
   #   return redirect('inicio')
   if request.method == 'POST':
     form = CreateProductForm(request.POST, request.FILES)
-    print(request.POST)
     if form.is_valid():
       form.save()
       form = CreateProductForm()
@@ -90,7 +90,7 @@ def productoCrud(request):
   form = CreateProductForm()
   return render(request, 'productoCrud.html', {'form':form})
 
-def productoEdit(request, pk):   
+def productoEdit(request, pk):
   if Producto.objects.filter(id=pk).exists():
     producto = Producto.objects.get(id=pk)
     form = CreateProductForm(instance=producto)
@@ -102,7 +102,7 @@ def productoEdit(request, pk):
 
   return render(request, 'productoCrud.html', {'form': form})
 
-def productoDetalle(request, pk):   
+def productoDetalle(request, pk):
   # if Producto.objects.filter(id=pk).exists():
   producto = Producto.objects.get(id=pk)
   form = CreateProductForm(instance=producto)
@@ -113,7 +113,7 @@ def productoDetalle(request, pk):
       redirect('productoCrud')
 
   return render(request, 'productoDetalle.html', {'form': form, 'productoId':pk})
-  
+
 
 def productoFind(request, catg=''):
   if request.method == 'POST':
@@ -133,6 +133,9 @@ def productoFind(request, catg=''):
 
 def acercaDe(request):
   return render(request, 'acercaDe.html')
+
+def contacto(request):
+  return render(request, 'contacto.html')
 
 
 

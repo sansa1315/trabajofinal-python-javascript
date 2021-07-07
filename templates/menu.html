@@ -11,7 +11,7 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Categorias
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">          
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           {% for categoria in categorias %}
             <a class="dropdown-item" href="{% url 'productoFind' catg=categoria.descripcion %}">{{categoria.descripcion}}</a>
           {% endfor %}
@@ -22,7 +22,7 @@
         <a class="nav-link" href="{% url 'acercaDe' %}">Acerca de...</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Contacto</a>
+        <a class="nav-link" href="{% url 'contacto' %}">Contacto</a>
       </li>
       {% if request.user.is_superuser %}
       <li class="nav-item">

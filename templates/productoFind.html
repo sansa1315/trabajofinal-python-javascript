@@ -17,7 +17,9 @@
                             <div :class="mobile ? 'col-8' : 'col-6'">
                                 <p>{{prod.descripcion}}</p>
                                 <p>Precio: {{prod.precio}}</p>
-                                <a href="{% url 'carrito' pk=prod.id %}" class="btn btn-success">añadir al carrito</a>
+                                {% if not request.user.is_superuser %}                                      
+                                    <a href="{% url 'carrito' pk=prod.id %}" class="btn btn-success">añadir al carrito</a>
+                                {% endif %} 
                             </div>
                             {% if request.user.is_superuser %}
                             <div class="col-2 d-flex flex-column justify-content-center align-items-center">

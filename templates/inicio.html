@@ -6,6 +6,8 @@
 
 {% block container %}
     <div class="">
+
+
         <div class="row">
             {% for producto in productos %}
                 {% if forloop.counter <= 3 %}
@@ -14,7 +16,7 @@
                             <h4>{{producto.nombre}}</h4>
                             <img src="http://localhost:8000/media/{{ producto.imagen}}" alt="imgProd" srcset="" width="200px">
                             <br>
-                            <a href="{% url 'productoDetalle' pk=producto.id %}" class="btn btn-primary my-2">Ver ahora</a>
+                            <a  href="{% url 'productoDetalle' pk=producto.id %}" class="btn btn-primary my-2">Ver ahora</a>
                         </div>
                     </div>
                 {% endif %}
@@ -30,7 +32,7 @@
                     {% for producto in productos %}
                         {% if forloop.counter > 3%}
                             <li>
-                                <a href="{% url 'productoDetalle' pk=producto.id %}">{{producto.nombre}} | {{producto.descripcion}}</a>
+                                <a class="anchor" href="{% url 'productoDetalle' pk=producto.id %}">{{producto.nombre}} | {{producto.descripcion}}</a>
                             </li>
                             <br>
                         {% endif %}

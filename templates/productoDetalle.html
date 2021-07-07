@@ -5,12 +5,18 @@
 {% endblock %}
 
 {% block container %}
-    <div>        
-        <h3>{{form.nombre.value}}</h3>
-        <p>{{form.descripcion.value}}</p>
-        
-        <img src="http://localhost:8000/media/{{ form.imagen.value }}" alt="imgInfo" srcset="" width="250">
-        <p>Precio {{form.precio.value}}</p>
-        <a href="{% url 'carrito' pk=productoId %}" class="btn btn-success">Añadir al carrito</a>        
+    <div class="row">
+        <div class="col-4">
+            <h3>{{form.nombre.value}}</h3>
+            <p>{{form.descripcion.value}}</p>            
+            <img src="http://localhost:8000/media/{{ form.imagen.value }}" alt="imgInfo" srcset="" width="250">
+        </div>        
+        <div class="col-8">
+            <p>Precio {{form.precio.value}}</p>
+            <br>
+            {% if not request.user.is_superuser %}
+            <a href="{% url 'carrito' pk=productoId %}" class="btn btn-success">Añadir al carrito</a>  
+            {% endif %}      
+        </div>        
     </div>
 {% endblock %}

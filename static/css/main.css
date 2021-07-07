@@ -6,7 +6,7 @@
 }
 
 .login-container{
-    width: 360px; 
+    width: 360px;
     margin: 0 auto;
 }
 
@@ -20,11 +20,11 @@
 }
 
 .form-inline-login {
-    
+
     display: flex;
-    
+
     /* flex-flow: row wrap; */
-    
+
     align-items: center;
 }
 
@@ -39,3 +39,4 @@
 .ml-1{
     margin-left:5px;
 }
+
